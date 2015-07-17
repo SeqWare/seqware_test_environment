@@ -44,3 +44,5 @@ This should start up the container, run the workflow, and then cleanup the conta
 1. Look on [Docker Hub](https://registry.hub.docker.com/u/seqware/seqware_full/tags/manage/) to get the latest pre-production builds. For example, at the current time
 
         docker pull seqware/seqware_full:1.2.0-alpha.0
+        
+2. Next, follow the instructions above while substituting the relevant version numbers 
