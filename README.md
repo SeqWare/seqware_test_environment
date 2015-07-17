@@ -31,8 +31,16 @@
 This should start up the container, run the workflow, and then cleanup the container. You can then examine the results in the persistent datastore directory.
         
         
-## Developers - building the image locally 
+## Developers 
+
+### Building the image locally 
 
 1. Assuming docker is installed properly, build image with 
 
         docker build  -t seqware/seqware_full:1.1.1 .
+        
+### Running Alpha Builds
+
+1. Look on [Docker Hub](https://registry.hub.docker.com/u/seqware/seqware_full/tags/manage/) to get the latest pre-production builds. For example, at the current time
+
+        docker pull seqware/seqware_full:1.2.0-alpha.0
