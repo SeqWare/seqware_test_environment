@@ -1,3 +1,5 @@
+[![](https://badge.imagelayers.io/seqware/seqware_full:latest.svg)](https://imagelayers.io/?images=seqware/seqware_full:latest 'Get your own badge on imagelayers.io')
+
 ## Users - running a container 
 
 1. Set permissions on datastore which will hold results of workflows after they run
