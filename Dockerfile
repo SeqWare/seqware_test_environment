@@ -22,18 +22,18 @@ WORKDIR /root
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 COPY inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
-RUN git checkout 1.0.0
+RUN git checkout feature/test_environment
 ENV HOSTNAME master
 # hurray! this seems to satisfy gridengine-master's hostname lookup 
 RUN echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
-RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.1 docker=yes"
+RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.1 docker=yes test_environment=yes"
 # at this point, seqware has been fully setup
 ENV HOME /home/seqware
 USER seqware
 WORKDIR /home/seqware
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 # setup an ansible script to startup our required services when the container starts
-RUN cd seqware-bag && git checkout 1.0.0
+RUN cd seqware-bag && git checkout feature/test_environment
 COPY ./scripts/start.sh /start.sh
 RUN sudo chmod a+x /start.sh
 
