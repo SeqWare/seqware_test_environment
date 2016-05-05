@@ -40,17 +40,17 @@ RUN sudo chmod a+x /start.sh
 # setup docker in docker functionality assuming socket binding, inspired by https://github.com/jpetazzo/dind and https://github.com/docker/docker/issues/7285
 # example command: docker run --privileged  -h master --rm -t -i -v /var/run/docker.sock:/var/run/docker.sock seqware/seqware_whitestar
 
-USER root
-RUN apt-get update -qq && apt-get install -qqy \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    lxc \
-    iptables
+#USER root
+#RUN apt-get update -qq && apt-get install -qqy \
+#    apt-transport-https \
+#    ca-certificates \
+#    curl \
+#    lxc \
+#    iptables
 # Install Docker from Docker Inc. repositories.
-RUN curl -sSL https://get.docker.com/ | sh
+#RUN curl -sSL https://get.docker.com/ | sh
 # Add non-root access to docker
-RUN sudo gpasswd -a seqware docker
+#RUN sudo gpasswd -a seqware docker
 
 USER seqware
 CMD ["/bin/bash", "/start.sh"]
