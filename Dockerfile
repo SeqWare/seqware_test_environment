@@ -26,7 +26,7 @@ RUN git checkout feature/test_environment
 ENV HOSTNAME master
 # hurray! this seems to satisfy gridengine-master's hostname lookup 
 RUN echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
-RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.1 docker=yes test_environment=yes"
+RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.1 docker=yes test_environment=yes seqware_provider=git"
 # at this point, seqware has been fully setup
 ENV HOME /home/seqware
 USER seqware
