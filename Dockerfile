@@ -4,7 +4,7 @@
 #
 # Setup prerequities to run seqware-bag in order to setup a full SeqWare stack
 
-FROM ubuntu:12.04
+FROM ubuntu:14.04
 MAINTAINER Denis Yuen <denis.yuen@oicr.on.ca>
 
 # use ansible to create our dockerfile, see http://www.ansible.com/2014/02/12/installing-and-building-docker-with-ansible
