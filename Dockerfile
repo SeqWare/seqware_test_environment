@@ -9,7 +9,7 @@ MAINTAINER Denis Yuen <denis.yuen@oicr.on.ca>
 
 # use ansible to create our dockerfile, see http://www.ansible.com/2014/02/12/installing-and-building-docker-with-ansible
 RUN apt-get -y update ;\
-    apt-get install -y python-yaml python-jinja2 git wget tree sudo;\
+    apt-get install -y python-yaml python-jinja2 git wget sudo;\
     git clone http://github.com/ansible/ansible.git /tmp/ansible
 WORKDIR /tmp/ansible
 # get a specific version of ansible , add sudo to seqware, create a working directory
@@ -22,7 +22,7 @@ WORKDIR /root
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 COPY inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
-RUN git checkout feature/test_environment
+RUN git checkout 1.0.1-test 
 ENV HOSTNAME master
 # why is this required with Java 8 and local ansible connections??
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
@@ -35,9 +35,12 @@ USER seqware
 WORKDIR /home/seqware
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 # setup an ansible script to startup our required services when the container starts
-RUN cd seqware-bag && git checkout feature/test_environment
+RUN cd seqware-bag && git checkout 1.0.1-test
+
 COPY ./scripts/start.sh /start.sh
 RUN sudo chmod a+x /start.sh
+COPY ./scripts/test-start.sh /test-start.sh
+RUN sudo chmod a+x /test-start.sh
 
 # setup docker in docker functionality assuming socket binding, inspired by https://github.com/jpetazzo/dind and https://github.com/docker/docker/issues/7285
 # example command: docker run --privileged  -h master --rm -t -i -v /var/run/docker.sock:/var/run/docker.sock seqware/seqware_whitestar

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o pipefail
+
+# kick off all services
+
+ansible-playbook /mnt/home/seqware/seqware-bag/docker-test-start.yml -c local --extra-vars "single_node=True"
+cd ~seqware
+source ~seqware/.bash_profile
+source ~seqware/.bashrc 
+sudo -E -u seqware -i /bin/bash -c "${1-bash}"
