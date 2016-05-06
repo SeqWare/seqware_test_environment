@@ -24,6 +24,8 @@ COPY inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
 RUN git checkout feature/test_environment
 ENV HOSTNAME master
+# why is this required with Java 8 and local ansible connections??
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 # hurray! this seems to satisfy gridengine-master's hostname lookup 
 RUN echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
 RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.1 docker=yes test_environment=yes seqware_provider=git"
