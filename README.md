@@ -4,6 +4,7 @@
 
 ### Using this image
 
+
 ### Building the image locally 
 
 1. Assuming docker is installed properly, build image with 
