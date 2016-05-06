@@ -9,7 +9,7 @@ MAINTAINER Denis Yuen <denis.yuen@oicr.on.ca>
 
 # use ansible to create our dockerfile, see http://www.ansible.com/2014/02/12/installing-and-building-docker-with-ansible
 RUN apt-get -y update ;\
-    apt-get install -y python-yaml python-jinja2 git wget sudo;\
+    apt-get install -y python-yaml python-jinja2 git wget tree sudo;\
     git clone http://github.com/ansible/ansible.git /tmp/ansible
 WORKDIR /tmp/ansible
 # get a specific version of ansible , add sudo to seqware, create a working directory
