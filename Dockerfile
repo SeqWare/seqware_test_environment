@@ -14,6 +14,7 @@ RUN apt-get -y update ;\
 WORKDIR /tmp/ansible
 # get a specific version of ansible , add sudo to seqware, create a working directory
 RUN git checkout v1.6.10 ;
+RUN git submodule update --init --recursive
 ENV PATH /tmp/ansible/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV ANSIBLE_LIBRARY /tmp/ansible/library
 ENV PYTHONPATH /tmp/ansible/lib:$PYTHON_PATH
@@ -22,20 +23,20 @@ WORKDIR /root
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 COPY inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
-RUN git checkout 1.0.1-test 
+RUN git checkout 1.0.2-test
 ENV HOSTNAME master
 # why is this required with Java 8 and local ansible connections??
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 # hurray! this seems to satisfy gridengine-master's hostname lookup 
 RUN echo "127.0.0.1    master" > /tmp/tmpfile && cat /etc/hosts >> /tmp/tmpfile
-RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.1.1 docker=yes test_environment=yes seqware_provider=git"
+RUN cat /tmp/tmpfile > /etc/hosts && ansible-playbook seqware-install.yml -c local --extra-vars "seqware_version=1.2.0-alpha.0 docker=yes test_environment=yes seqware_provider=git"
 # at this point, seqware has been fully setup
 ENV HOME /home/seqware
 USER seqware
 WORKDIR /home/seqware
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 # setup an ansible script to startup our required services when the container starts
-RUN cd seqware-bag && git checkout 1.0.1-test
+RUN cd seqware-bag && git checkout 1.0.2-test
 
 COPY ./scripts/start.sh /start.sh
 RUN sudo chmod a+x /start.sh
