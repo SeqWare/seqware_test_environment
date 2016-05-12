@@ -9,7 +9,7 @@ MAINTAINER Denis Yuen <denis.yuen@oicr.on.ca>
 
 # use ansible to create our dockerfile, see http://www.ansible.com/2014/02/12/installing-and-building-docker-with-ansible
 RUN apt-get -y update ;\
-    apt-get install -y python-yaml python-jinja2 git wget sudo;\
+    apt-get install -y curl python-yaml python-jinja2 git wget sudo;\
     git clone http://github.com/ansible/ansible.git /tmp/ansible
 WORKDIR /tmp/ansible
 # get a specific version of ansible , add sudo to seqware, create a working directory
@@ -18,6 +18,7 @@ RUN git submodule update --init --recursive
 ENV PATH /tmp/ansible/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV ANSIBLE_LIBRARY /tmp/ansible/library
 ENV PYTHONPATH /tmp/ansible/lib:$PYTHON_PATH
+
 # setup seqware 
 WORKDIR /root 
 RUN git clone https://github.com/SeqWare/seqware-bag.git
@@ -57,6 +58,19 @@ RUN sudo chmod a+x /test-start.sh
 #RUN curl -sSL https://get.docker.com/ | sh
 # Add non-root access to docker
 #RUN sudo gpasswd -a seqware docker
+USER root
+
+RUN apt-get -y remove maven 
+
+# install Maven 3.3.9, should use ansible
+ENV MAVEN_VERSION 3.3.9
+
+RUN mkdir -p /usr/share/maven \
+  && curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
+    | tar -xzC /usr/share/maven --strip-components=1 \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+ENV MAVEN_HOME /usr/share/maven
 
 USER seqware
 CMD ["/bin/bash", "/start.sh"]
