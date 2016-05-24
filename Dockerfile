@@ -24,7 +24,7 @@ WORKDIR /root
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 COPY inventory /etc/ansible/hosts
 WORKDIR /root/seqware-bag 
-RUN git checkout 1.0.3
+RUN git checkout feature/side-effect
 ENV HOSTNAME master
 # why is this required with Java 8 and local ansible connections??
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
@@ -37,7 +37,7 @@ USER seqware
 WORKDIR /home/seqware
 RUN git clone https://github.com/SeqWare/seqware-bag.git
 # setup an ansible script to startup our required services when the container starts
-RUN cd seqware-bag && git checkout 1.0.3
+RUN cd seqware-bag && git checkout feature/side-effect
 
 COPY ./scripts/start.sh /start.sh
 RUN sudo chmod a+x /start.sh
