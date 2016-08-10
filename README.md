@@ -1,4 +1,4 @@
-[![](https://badge.imagelayers.io/seqware/seqware_test_environment:latest.svg)](https://imagelayers.io/?images=seqware/seqware_test_environment:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/seqware/seqware_test_environment.svg)](https://microbadger.com/images/seqware/seqware_test_environment "Get your own image badge on microbadger.com")
 
 ## Developers 
 
