@@ -1,4 +1,4 @@
-[![](https://images.microbadger.com/badges/image/seqware/seqware_test_environment.svg)](https://microbadger.com/images/seqware/seqware_test_environment "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/seqware/seqware_test_environment.svg)](https://microbadger.com/images/seqware/seqware_test_environment "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/seqware/seqware_test_environment.svg)](http://microbadger.com/images/seqware/seqware_test_environment "Get your own version badge on microbadger.com")
 
 ## Developers 
 
